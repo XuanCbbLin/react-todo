@@ -15,8 +15,13 @@ function TodoForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Type is Something" ref={inputRef} />
+    <form onSubmit={handleSubmit} className="mb-3">
+      <input
+        type="text"
+        placeholder="Type is Something"
+        className="pl-2 w-[250px] h-[30px] rounded-[5px] outline-none border-2 border-[#393e46] transition duration-500 mb-[10px]"
+        ref={inputRef}
+      />
     </form>
   );
 }

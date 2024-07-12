@@ -10,6 +10,7 @@ interface Todos {
 interface TodoState {
     todos: Todos[];
     addNewTodo: (todoContent: string) => void;
+    toggleCompleteTodo: (todoId: string) => void;
 }
 
 const todoObj = (todoContent: string) => {
@@ -28,12 +29,24 @@ const addNewTodo = (todos: Todos[], todoContent: string) => {
     return newTodo;
 };
 
+const toggleCompleteTodo = (todos: Todos[], todoId: string) => {
+    const newTodo = todos.map((todo) => (todo.id === todoId ? { ...todo, complete: true } : todo));
+
+    return newTodo;
+};
+
 const useTodo = create<TodoState>((set) => ({
     todos: [],
     addNewTodo(todoContent: string) {
         set((state) => ({
             ...state,
             todos: addNewTodo(state.todos, todoContent),
+        }));
+    },
+    toggleCompleteTodo(todoId: string) {
+        set((state) => ({
+            ...state,
+            todos: toggleCompleteTodo(state.todos, todoId),
         }));
     },
 }));
