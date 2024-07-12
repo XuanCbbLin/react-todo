@@ -1,7 +1,7 @@
 import { useTodo } from '../store/useTodo';
 
 function Todos() {
-  const { todos, toggleCompleteTodo } = useTodo();
+  const { todos, toggleCompleteTodo, deleteTodo } = useTodo();
 
   return (
     <div>
@@ -28,7 +28,12 @@ function Todos() {
                 Complete
               </button>
               <button className=" bg-[#F2DA05] rounded-[5px] ml-2 px-3 py-1 mb-3">Edit</button>
-              <button className="bg-[#ff8fb1] rounded-[5px] ml-2 px-3 py-1 mb-3">Delete</button>
+              <button
+                className="bg-[#ff8fb1] rounded-[5px] ml-2 px-3 py-1 mb-3"
+                onClick={() => deleteTodo(todo.id)}
+              >
+                Delete
+              </button>
             </div>
           )}
         </div>

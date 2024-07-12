@@ -11,6 +11,7 @@ interface TodoState {
     todos: Todos[];
     addNewTodo: (todoContent: string) => void;
     toggleCompleteTodo: (todoId: string) => void;
+    deleteTodo: (todoId: string) => void;
 }
 
 const todoObj = (todoContent: string) => {
@@ -35,6 +36,12 @@ const toggleCompleteTodo = (todos: Todos[], todoId: string) => {
     return newTodo;
 };
 
+const deleteTodo = (todos: Todos[], todoId: string) => {
+    const newTodo = todos.filter((todo) => todo.id !== todoId);
+
+    return newTodo;
+};
+
 const useTodo = create<TodoState>((set) => ({
     todos: [],
     addNewTodo(todoContent: string) {
@@ -47,6 +54,12 @@ const useTodo = create<TodoState>((set) => ({
         set((state) => ({
             ...state,
             todos: toggleCompleteTodo(state.todos, todoId),
+        }));
+    },
+    deleteTodo(todoId) {
+        set((state) => ({
+            ...state,
+            todos: deleteTodo(state.todos, todoId),
         }));
     },
 }));
