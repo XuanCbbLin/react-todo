@@ -5,7 +5,12 @@ export default function Products() {
 
     return (
         <div>
-            <button onClick={() => getProducts()}>Get Products</button>
+            <button
+                className="rounded-md border border-transparent px-3 py-1 text-base font-medium cursor-pointer mx-auto mb-5 bg-gray-400"
+                onClick={() => getProducts()}
+            >
+                Get Products
+            </button>
             {products.map((product) => (
                 <h1 key={product.id}>{product.title}</h1>
             ))}
