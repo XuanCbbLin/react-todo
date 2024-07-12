@@ -1,4 +1,4 @@
-import { useTodo } from '../store/useTodo';
+import { useTodo } from '../state/useTodo';
 
 function Todos() {
   const { todos, toggleCompleteTodo, deleteTodo, toggleEditTodo, updateEditingTodoContent } = useTodo();
