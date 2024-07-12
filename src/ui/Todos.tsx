@@ -1,6 +1,8 @@
-import React from 'react';
+import { useTodo } from '../store/useTodo';
 
 function Todos() {
+  const { todos } = useTodo();
+
   return (
     <div>
       <p>Todos</p>
