@@ -11,11 +11,11 @@ function Todos() {
             <div>
               <input
                 value={todo.todoContent}
-                className="pl-2 w-[250px] h-[30px] rounded-[5px] outline-none border-2 border-[#393e46] transition duration-500 mb-[10px]"
+                className="mb-[10px] h-[30px] w-[250px] rounded-[5px] border-2 border-[#393e46] pl-2 outline-none transition duration-500"
                 onChange={e => updateEditingTodoContent(todo.id, e.target.value)}
               />
               <button
-                className="bg-[#5cf416] rounded-[5px] ml-2 px-2 py-1"
+                className="ml-2 rounded-[5px] bg-[#5cf416] px-2 py-1"
                 onClick={() => toggleEditTodo(todo.id)}
               >
                 Save
@@ -31,19 +31,19 @@ function Todos() {
                 {todo.todoContent}
               </span>
               <button
-                className="bg-[#b6e2a1] rounded-[5px] ml-2 px-3 py-1 mb-3"
+                className="mb-3 ml-2 rounded-[5px] bg-[#b6e2a1] px-3 py-1"
                 onClick={() => toggleCompleteTodo(todo.id)}
               >
                 Complete
               </button>
               <button
-                className=" bg-[#F2DA05] rounded-[5px] ml-2 px-3 py-1 mb-3"
+                className="mb-3 ml-2 rounded-[5px] bg-[#F2DA05] px-3 py-1"
                 onClick={() => toggleEditTodo(todo.id)}
               >
                 Edit
               </button>
               <button
-                className="bg-[#ff8fb1] rounded-[5px] ml-2 px-3 py-1 mb-3"
+                className="mb-3 ml-2 rounded-[5px] bg-[#ff8fb1] px-3 py-1"
                 onClick={() => deleteTodo(todo.id)}
               >
                 Delete

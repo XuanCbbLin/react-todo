@@ -19,7 +19,7 @@ function TodoForm() {
       <input
         type="text"
         placeholder="Type is Something"
-        className="pl-2 w-[250px] h-[30px] rounded-[5px] outline-none border-2 border-[#393e46] transition duration-500 mb-[10px]"
+        className="mb-[10px] h-[30px] w-[250px] rounded-[5px] border-2 border-[#393e46] pl-2 outline-none transition duration-500"
         ref={inputRef}
       />
     </form>
