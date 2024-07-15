@@ -1,6 +1,6 @@
-import "./App.css";
-import { TodoForm } from "./ui/TodoForm";
-import { Todos } from "./ui/Todos";
+import './App.css';
+import { TodoForm } from './ui/TodoForm';
+import { Todos } from './ui/Todos';
 
 function App() {
   return (
