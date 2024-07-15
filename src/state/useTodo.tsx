@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface Todos {
   id: string;
@@ -56,38 +57,40 @@ const updateEditingTodoContent = (todos: Todos[], todoId: string, todoContent: s
   return newTodo;
 };
 
-const useTodo = create<TodoState>(set => ({
-  todos: [],
-  addNewTodo(todoContent: string) {
-    set(state => ({
-      ...state,
-      todos: addNewTodo(state.todos, todoContent),
-    }));
-  },
-  toggleCompleteTodo(todoId: string) {
-    set(state => ({
-      ...state,
-      todos: toggleCompleteTodo(state.todos, todoId),
-    }));
-  },
-  deleteTodo(todoId) {
-    set(state => ({
-      ...state,
-      todos: deleteTodo(state.todos, todoId),
-    }));
-  },
-  toggleEditTodo(todoId) {
-    set(state => ({
-      ...state,
-      todos: toggleEditTodo(state.todos, todoId),
-    }));
-  },
-  updateEditingTodoContent(todoId, todoContent) {
-    set(state => ({
-      ...state,
-      todos: updateEditingTodoContent(state.todos, todoId, todoContent),
-    }));
-  },
-}));
+const useTodo = create<TodoState>()(
+  devtools(set => ({
+    todos: [],
+    addNewTodo(todoContent: string) {
+      set(state => ({
+        ...state,
+        todos: addNewTodo(state.todos, todoContent),
+      }));
+    },
+    toggleCompleteTodo(todoId: string) {
+      set(state => ({
+        ...state,
+        todos: toggleCompleteTodo(state.todos, todoId),
+      }));
+    },
+    deleteTodo(todoId) {
+      set(state => ({
+        ...state,
+        todos: deleteTodo(state.todos, todoId),
+      }));
+    },
+    toggleEditTodo(todoId) {
+      set(state => ({
+        ...state,
+        todos: toggleEditTodo(state.todos, todoId),
+      }));
+    },
+    updateEditingTodoContent(todoId, todoContent) {
+      set(state => ({
+        ...state,
+        todos: updateEditingTodoContent(state.todos, todoId, todoContent),
+      }));
+    },
+  }))
+);
 
 export { useTodo };
