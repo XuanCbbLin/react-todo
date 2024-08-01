@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 
 interface Todos {
   id: string;
@@ -60,46 +61,42 @@ const updateEditingTodoContent = (todos: Todos[], todoId: string, todoContent: s
 };
 
 const useTodo = create<TodoState>()(
-  devtools(set => ({
-    todos: [],
-    count: 0,
-    increment() {
-      set(state => ({
-        ...state,
-        count: state.count + 1,
-      }));
-    },
-    addNewTodo(todoContent: string) {
-      set(state => ({
-        ...state,
-        todos: addNewTodo(state.todos, todoContent),
-      }));
-    },
-    toggleCompleteTodo(todoId: string) {
-      set(state => ({
-        ...state,
-        todos: toggleCompleteTodo(state.todos, todoId),
-      }));
-    },
-    deleteTodo(todoId) {
-      set(state => ({
-        ...state,
-        todos: deleteTodo(state.todos, todoId),
-      }));
-    },
-    toggleEditTodo(todoId) {
-      set(state => ({
-        ...state,
-        todos: toggleEditTodo(state.todos, todoId),
-      }));
-    },
-    updateEditingTodoContent(todoId, todoContent) {
-      set(state => ({
-        ...state,
-        todos: updateEditingTodoContent(state.todos, todoId, todoContent),
-      }));
-    },
-  }))
+  devtools(
+    immer(set => ({
+      todos: [],
+      count: 0,
+      increment() {
+        set(state => {
+          state.count += 1;
+        });
+      },
+      addNewTodo(todoContent: string) {
+        set(state => {
+          state.todos = addNewTodo(state.todos, todoContent);
+        });
+      },
+      toggleCompleteTodo(todoId: string) {
+        set(state => {
+          state.todos = toggleCompleteTodo(state.todos, todoId);
+        });
+      },
+      deleteTodo(todoId) {
+        set(state => {
+          state.todos = deleteTodo(state.todos, todoId);
+        });
+      },
+      toggleEditTodo(todoId) {
+        set(state => {
+          state.todos = toggleEditTodo(state.todos, todoId);
+        });
+      },
+      updateEditingTodoContent(todoId, todoContent) {
+        set(state => {
+          state.todos = updateEditingTodoContent(state.todos, todoId, todoContent)
+        });
+      },
+    }))
+  )
 );
 
 export { useTodo };
