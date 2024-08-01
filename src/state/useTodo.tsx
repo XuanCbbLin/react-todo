@@ -10,6 +10,8 @@ interface Todos {
 
 interface TodoState {
   todos: Todos[];
+  count: number;
+  increment: () => void;
   addNewTodo: (todoContent: string) => void;
   toggleCompleteTodo: (todoId: string) => void;
   deleteTodo: (todoId: string) => void;
@@ -60,6 +62,13 @@ const updateEditingTodoContent = (todos: Todos[], todoId: string, todoContent: s
 const useTodo = create<TodoState>()(
   devtools(set => ({
     todos: [],
+    count: 0,
+    increment() {
+      set(state => ({
+        ...state,
+        count: state.count + 1,
+      }));
+    },
     addNewTodo(todoContent: string) {
       set(state => ({
         ...state,
