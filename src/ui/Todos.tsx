@@ -1,7 +1,19 @@
-import { useTodo } from '../state/useTodo';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  toggleCompleteTodo,
+  deleteTodo,
+  toggleEditTodo,
+  updateEditingTodoContent,
+} from '../features/todoSlice';
+
+import type { RootState } from '../store';
 
 function Todos() {
-  const { todos, toggleCompleteTodo, deleteTodo, toggleEditTodo, updateEditingTodoContent } = useTodo();
+  const todos = useSelector((state: RootState) => {
+    return state.todo.todos;
+  });
+
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -12,11 +24,13 @@ function Todos() {
               <input
                 value={todo.todoContent}
                 className="mb-[10px] h-[30px] w-[250px] rounded-[5px] border-2 border-[#393e46] pl-2 outline-none transition duration-500"
-                onChange={e => updateEditingTodoContent(todo.id, e.target.value)}
+                onChange={e =>
+                  dispatch(updateEditingTodoContent({ todoId: todo.id, todoContent: e.target.value }))
+                }
               />
               <button
                 className="ml-2 rounded-[5px] bg-[#5cf416] px-2 py-1"
-                onClick={() => toggleEditTodo(todo.id)}
+                onClick={() => dispatch(toggleEditTodo(todo.id))}
               >
                 Save
               </button>
@@ -32,19 +46,19 @@ function Todos() {
               </span>
               <button
                 className="mb-3 ml-2 rounded-[5px] bg-[#b6e2a1] px-3 py-1"
-                onClick={() => toggleCompleteTodo(todo.id)}
+                onClick={() => dispatch(toggleCompleteTodo(todo.id))}
               >
                 Complete
               </button>
               <button
                 className="mb-3 ml-2 rounded-[5px] bg-[#F2DA05] px-3 py-1"
-                onClick={() => toggleEditTodo(todo.id)}
+                onClick={() => dispatch(toggleEditTodo(todo.id))}
               >
                 Edit
               </button>
               <button
                 className="mb-3 ml-2 rounded-[5px] bg-[#ff8fb1] px-3 py-1"
-                onClick={() => deleteTodo(todo.id)}
+                onClick={() => dispatch(deleteTodo(todo.id))}
               >
                 Delete
               </button>
