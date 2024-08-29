@@ -2,15 +2,19 @@ import './App.css';
 import { TodoForm } from './ui/TodoForm';
 import { Todos } from './ui/Todos';
 import Products from './ui/Product';
-import Count from './ui/Count';
+import { TodoProvider } from './TodoContext';
+import { ProductProvider } from './ProductContext';
 
 function App() {
   return (
     <>
-      <Count></Count>
-      <TodoForm></TodoForm>
-      <Todos></Todos>
-      <Products></Products>
+      <TodoProvider>
+        <TodoForm></TodoForm>
+        <Todos></Todos>
+        <ProductProvider>
+          <Products></Products>
+        </ProductProvider>
+      </TodoProvider>
     </>
   );
 }

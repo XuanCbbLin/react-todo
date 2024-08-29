@@ -1,15 +1,9 @@
 import React, { useRef } from 'react';
-import { useTodo } from '../state/useTodo';
-// import { useShallow } from 'zustand/react/shallow';
+import { useTodo } from '../TodoContext';
 
 function TodoForm() {
-  const { addNewTodo } = useTodo();
-  // 練習 useShallow 避免 component rerender
-  // const { addNewTodo } = useTodo(useShallow(state => ({ addNewTodo: state.addNewTodo })));
-
-  console.log('TodoForm re-render');
-
   const inputRef = useRef<HTMLInputElement>(null);
+  const { addNewTodo } = useTodo();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
